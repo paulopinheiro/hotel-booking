@@ -1,4 +1,4 @@
-package br.com.paulopinheiro.hotelbooking;
+package br.com.paulopinheiro.hotelbooking.dao;
 
 import jakarta.persistence.EntityManager;
 import java.util.List;
