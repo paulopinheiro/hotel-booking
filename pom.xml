@@ -43,5 +43,6 @@
         <module>hotel-booking-persistence</module>
         <module>hotel-booking-customers</module>
         <module>hotel-booking-hotels</module>
+        <module>hotel-booking-core</module>
     </modules>
 </project>
