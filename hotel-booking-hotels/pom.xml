@@ -14,14 +14,10 @@
         <dependency>
             <groupId>br.com.paulopinheiro</groupId>
             <artifactId>hotel-booking-persistence</artifactId>
-            <version>${revision}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>br.com.paulopinheiro</groupId>
             <artifactId>hotel-booking-customers</artifactId>
-            <version>${revision}</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
