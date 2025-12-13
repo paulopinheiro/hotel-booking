@@ -6,25 +6,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
 
 @Entity
-@Table(name="loyalty_program")
-public class LoyaltyProgram implements Serializable {
+public class Feedback implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotNull
     @ManyToOne @JoinColumn(name="customer_id", referencedColumnName="id", nullable=false)
     private Customer customer;
-    @NotNull @Min(0)
-    private Integer points;
+    @NotNull @Size(min=1, max=32672)
+    private String message;
 
     public Integer getId() {return id;}
     public void setId(Integer id) {this.id = id;}
@@ -32,8 +30,8 @@ public class LoyaltyProgram implements Serializable {
     public Customer getCustomer() {return customer;}
     public void setCustomer(Customer customer) {this.customer = customer;}
 
-    public Integer getPoints() {return points;}
-    public void setPoints(Integer points) {this.points = points;}
+    public String getMessage() {return message;}
+    public void setMessage(String message) {this.message = message;}
 
     @Override
     public int hashCode() {
@@ -45,7 +43,7 @@ public class LoyaltyProgram implements Serializable {
         if (this==object) return true;
         if (Optional.ofNullable(object).isEmpty()) return false;
 
-        if (object instanceof LoyaltyProgram other)
+        if (object instanceof Feedback other)
             return Objects.equals(this.getId(), other.getId());
 
         return false;
@@ -53,6 +51,6 @@ public class LoyaltyProgram implements Serializable {
 
     @Override
     public String toString() {
-        return customer + ": " + points + " points";
+        return "Feedback[ id=" + id + " ] from " + customer;
     }
 }

@@ -5,10 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -48,12 +50,12 @@ public class Customer implements Serializable {
     @Override
     public boolean equals(Object object) {
         if (this==object) return true;
-        if ((Optional.ofNullable(object).isEmpty()) || !(object instanceof Customer))
-            return false;
+        if (Optional.ofNullable(object).isEmpty()) return false;
 
-        Customer other = (Customer) object;
+        if (object instanceof Customer other)
+            return Objects.equals(this.getId(), other.getId());
 
-        return Objects.equals(this.getId(), other.getId());
+        return false;
     }
 
     @Override
