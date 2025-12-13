@@ -1,10 +1,12 @@
-package br.com.paulopinheiro.hotelbooking.entity.customers;
+package br.com.paulopinheiro.hotelbooking.entity.hotels;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -13,16 +15,20 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Entity
-public class Customer implements Serializable {
+public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
+    @ManyToOne @JoinColumn(name="hotel_id", referencedColumnName="id", nullable=false)
+    private Hotel hotel;
     @NotNull @Size(min=1, max=255)
-    @Column(name="full_name", length=255, nullable=false)
+    @Column(name="full_name")
     private String fullName;
-    @NotNull @Size(min=1, max=255)
+    @NotNull @Size(min=1, max=100)
+    private String position;
+    @Size(max=255)
     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")
     private String email;
     @Size(max=20)
@@ -31,8 +37,14 @@ public class Customer implements Serializable {
     public Integer getId() {return id;}
     public void setId(Integer id) {this.id = id;}
 
+    public Hotel getHotel() {return hotel;}
+    public void setHotel(Hotel hotel) {this.hotel = hotel;}
+
     public String getFullName() {return fullName;}
     public void setFullName(String fullName) {this.fullName = fullName;}
+
+    public String getPosition() {return position;}
+    public void setPosition(String position) {this.position = position;}
 
     public String getEmail() {return email;}
     public void setEmail(String email) {this.email = email;}
@@ -50,7 +62,7 @@ public class Customer implements Serializable {
         if (this==object) return true;
         if (Optional.ofNullable(object).isEmpty()) return false;
 
-        if (object instanceof Customer other)
+        if (object instanceof Employee other)
             return Objects.equals(this.getId(), other.getId());
 
         return false;
@@ -58,6 +70,6 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return this.getFullName();
-    }
+        return fullName;
+    }    
 }
