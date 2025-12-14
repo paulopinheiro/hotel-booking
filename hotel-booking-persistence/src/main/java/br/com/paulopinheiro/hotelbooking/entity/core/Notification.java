@@ -1,5 +1,6 @@
-package br.com.paulopinheiro.hotelbooking.entity.customers;
+package br.com.paulopinheiro.hotelbooking.entity.core;
 
+import br.com.paulopinheiro.hotelbooking.entity.customers.Customer;
 import br.com.paulopinheiro.hotelbooking.entity.customers.enumeration.NotificationStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
