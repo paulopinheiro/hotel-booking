@@ -21,16 +21,16 @@ public class RoomImage implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
-    @ManyToOne @JoinColumn(name="room_id", referencedColumnName="id", nullable=false)
-    private Room room;
+    @ManyToOne @JoinColumn(name="room_type_id", referencedColumnName="id", nullable=false)
+    private RoomType roomType;
     @NotNull @Size(min=1, max=255)
     private String url;
 
     public Integer getId() {return id;}
     public void setId(Integer id) {this.id = id;}
 
-    public Room getRoom() {return room;}
-    public void setRoom(Room room) {this.room = room;}
+    public RoomType getRoomType() {return roomType;}
+    public void setRoomType(RoomType roomType) {this.roomType = roomType;}
 
     public String getUrl() {return url;}
     public void setUrl(String url) {this.url = url;}
@@ -53,6 +53,6 @@ public class RoomImage implements Serializable {
 
     @Override
     public String toString() {
-        return "Image for room " + room;
+        return "Image for room type " + roomType;
     }
 }
