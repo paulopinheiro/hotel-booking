@@ -40,7 +40,7 @@ public abstract class BasicMB<T> {
     }
 
     protected T getEntity() {
-        if (Optional.of(entity).isEmpty())
+        if (Optional.ofNullable(entity).isEmpty())
             entity = newEntityInstance();
         return entity;
     }

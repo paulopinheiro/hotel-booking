@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+    <body>
+        <ui:composition template="/resources/templates/mainTemplate.xhtml">
+            <ui:define name="pageTitle">#{manufacturerMB.pageTitle}</ui:define>
+            <ui:define name="content">
+                <h:form id="registrationForm">
+                    <p:panelGrid columns="3">
+                        <p:outputLabel for="id" value="Id" />
+                        <h:outputText id="id" value="#{customerMB.customer.id}" />
+                        <p:message for="id" />
+
+                        <p:outputLabel for="fullName" value="Full name" />
+                        <p:inputText id="fullName" value="#{customerMB.customer.fullName}" size="60" />
+                        <p:message for="fullName" />
+
+                        <p:outputLabel for="email" value="e-mail" />
+                        <p:inputText id="email" value="#{customerMB.customer.email}" size="60" />
+                        <p:message for="email" />
+
+                        <p:outputLabel for="phone" value="Phone" />
+                        <p:inputText id="phone" value="#{customerMB.customer.phone}" size="20" />
+                        <p:message for="phone" />
+                    </p:panelGrid>
+                    <p:panelGrid columns="3">
+                        <f:facet name="footer">
+                            <h:panelGroup style="align-content: center">
+                                <p:commandButton value="Save" process="@form" update="@form :messages :gmessages :listForm" actionListener="#{customerMB.save}" />
+                                <p:commandButton value="New" update="@form :messages :gmessages" actionListener="#{customerMB.clear}" />
+                                <p:commandButton value="Delete" onclick="PF('exclusionDialog').show();" disabled="#{customerMB.newEntity}" /> 
+                            </h:panelGroup>
+                        </f:facet>
+                    </p:panelGrid>
+                    <br />
+                    <p:dialog style="text-align: center;" widgetVar="exclusionDialog" header="Confirm Exclusion" modal="true" resizable="false">
+                             <h:outputText value="Are you sure you want to exclude this customer?" /><br /> <br />
+                             <p:commandButton value="Yes" process="@form" actionListener="#{customerMB.delete}" oncomplete="PF('exclusionDialog').hide()" update="@form :messages :gmessages :listForm" />
+                             <p:commandButton value="No" onclick="PF('exclusionDialog').hide()" type="button" />
+                    </p:dialog>
+                </h:form>
+                <p:growl id="gmessages" globalOnly="true" />
+                <p:messages id="messages" globalOnly="true" />
+                <h:form id="listForm">
+                    <p:dataTable value="#{customerMB.list}" var="customer">
+                        <p:column>
+                            <f:facet name="header">Name</f:facet>
+                            <p:commandLink value="#{customer.fullName}" update=":registrationForm">
+                                <f:setPropertyActionListener value="#{customer}" target="#{customerMB.customer}" />
+                            </p:commandLink>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">e-mail</f:facet>
+                            <h:outputText value="#{customer.email}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">phone</f:facet>
+                            <h:outputText value="#{customer.phone}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

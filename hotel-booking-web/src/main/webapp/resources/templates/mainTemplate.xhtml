@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="primefaces">
+    <f:view>
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title><ui:insert name="pageTitle">Sample DB Control System</ui:insert></title>
+        </h:head>
+
+        <h:body>
+            <div id="menuDiv">
+                <h:form id="menuForm">
+                    <p:menubar>
+                        <p:menuitem id="miHome" value="Home" outcome="/views/index.xhtml" />
+                        <p:submenu id="smBooking" label="Bookings">
+                        </p:submenu>
+                        <p:submenu id="smCustomers" label="Customers">
+                            <p:menuitem value="Register Customer" outcome="/views/customers/customer.xhtml" />
+                        </p:submenu>
+                        <p:submenu id="smHotels" label="Hotels">
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+            </div>
+            <div id="titleDiv" align="center">
+                <p:panel>
+                    <h3>Hotel Booking System</h3>
+                    <h4><ui:insert name="pageTitle">Page Title</ui:insert></h4>
+                </p:panel>
+            </div>
+            <div id="contentDiv">
+                <ui:insert name="content">Choose an option from the menu</ui:insert>
+            </div>
+            <div align="center" id="bottom">
+                <p:separator />
+                Developed by Paulo Pinheiro
+            </div>
+        </h:body>
+    </f:view>
+</html>

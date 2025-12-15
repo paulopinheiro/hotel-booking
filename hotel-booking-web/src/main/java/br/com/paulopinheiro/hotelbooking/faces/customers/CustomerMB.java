@@ -17,7 +17,7 @@ public class CustomerMB extends BasicMB<Customer> implements Serializable {
     
     @Override
     public boolean isNewEntity() {
-        return Optional.of(this.getEntity().getId()).isEmpty();
+        return Optional.ofNullable(this.getEntity().getId()).isEmpty();
     }
 
     @Override
