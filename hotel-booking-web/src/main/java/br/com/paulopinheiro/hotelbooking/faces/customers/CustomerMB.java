@@ -13,6 +13,7 @@ import java.util.Optional;
 @Named
 @ViewScoped
 public class CustomerMB extends BasicMB<Customer> implements Serializable {
+    private static final String TITLE = "Customer Registration";
     @EJB private CustomerService service;
     
     @Override
@@ -34,4 +35,8 @@ public class CustomerMB extends BasicMB<Customer> implements Serializable {
 
     public Customer getCustomer() {return this.getEntity();}
     public void setCustomer(Customer customer) {this.setEntity(customer);}
+
+    public String getTitle() {
+        return TITLE;
+    }
 }
